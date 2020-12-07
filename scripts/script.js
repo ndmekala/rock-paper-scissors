@@ -1,29 +1,4 @@
-// 1. Start a new Git repo for your project.
-
-// 2. Create a blank HTML document with a script tag. This game is going to be played completely from the console, so don’t worry about putting anything else in there.
-
-// 3. Your game is going to play against the computer, so begin with a function called computerPlay that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’. We’ll use this function in the game to make the computer’s play.
-
-// 4. Write a function that plays a single round of Rock Paper Scissors. The function should take two parameters - the playerSelection and computerSelection - and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
-//      - Make your function case insensitive (so users can input rock, ROCK, RocK or any other variation)
-
-// 5. Important note: you want to return the results of this function call, not console.log() them. To test this function console.log the results:
-// function playRound(playerSelection, computerSelection) {
-// your code here!
-// }
-// const playerSelection = "rock";
-// const computerSelection = computerPlay();
-// console.log(playRound(playerSelection, computerSelection));
-//      - (I think this is basically saying that function shouldn’t just include a console.log without returning…)
-
-// 6. Write a NEW function called game(). Use the previous function inside of this one to play a 5 round game that keeps score and reports a winner or loser at the end.
-//      - You have not officially learned how to “loop” over code to repeat function calls… if you already know about loops from somewhere else (or if you feel like doing some more learning) feel free to use them. If not, don’t worry! Just call your playRound function 5 times in a row. Loops are covered in the next lesson.
-//      - At this point you should be using console.log() to display the results of each round and the winner at the end.
-//      - Use prompt() to get input from the user. Read the docs here if you need to.
-//      - Feel free to re-work your previous functions if you need to. Specifically, you might want to change the return value to something more useful.
-//      - Feel free to create more “helper” functions if you think it would be useful.
-
-// FUNCTION computerPlay that randomly returns ‘Rock’, ‘Paper’ or ‘Scissors’
+// Function that randomly returns rock, paper, or scissors
 
 function computerPlay() {
     let playNumber = Math.floor(Math.random() * 3);
@@ -38,9 +13,7 @@ function computerPlay() {
     };
 };
 
-// Player Inputs a selection
-
-
+// Function that solicits and returns a player choice (and chooses rock if the player doesn’t input a legitimate choice)
 
 function getUserInput() {
     let userInputInsensitive = prompt("Rock, paper, scissors! What is your choice?", "");
@@ -48,72 +21,128 @@ function getUserInput() {
     if (userInput == 'rock' || userInput == 'paper' || userInput == 'scissors') {
         return userInput;
     } else {
-        alert('Shame on you! It’s called, “Rock, Paper, Scissors”!');
-        getUserInput();
+        alert('That’s not an option! (It’s called “Rock, paper, scissors”, silly!) Rock it is!');
+        return "rock";
     }
-    
-
-
-  //  console.log(playRound(playerSelection, computerSelection));
-  //  console.log("[playerSelection was " + playerSelection + "]");
-  //  console.log("[computerSelection was " + computerSelection + "]");
 }
 
-// FUNCTION single round of Rock/paper/scissors - two parameters playerSelection and computerSelection - return a SRING that declares the winner of the round “You Lose! Paper beats Rock… etc. * CASE INSENSITIVE *
+// FUNCTION single round of Rock/paper/scissors with the parameters being strings of rock, paper, or scissors
 
 function playRound(player, computer) {
     if (player == computer){
         return "It’s a Draw!";
     } else if (player == "rock"){
         if (computer == "paper") {
-            ++computerCount;
             return "You lose! Paper covers rock!";
         } else if (computer == "scissors") {
-            ++userCount;
             return "You win! Rock beats scissors!";
         };
     } else if (player == "paper"){
         if (computer == "scissors") {
-            ++computerCount;
             return "You lose! Scissors cuts paper!";
         } else if (computer == "rock") {
-            ++userCount;
             return "You win! Paper covers rock!";
         };
     } else if (player == "scissors"){
         if (computer == "rock") {
-            ++computerCount;
             return "You lose! Rock beats scissors!";
         } else if (computer == "paper") {
-            ++userCount;
             return "You win! Scissors cuts paper!";
         };
     }
 }
 
+// To juice this up, you’d need to figure out a way to add enough iterations to get a result when you have a draw
+// Another way to improve it would be to evaluate after games 3, 4, and 5 whether either computer or player had won enough games to win the “series”
+// I only built it with the playRound function outputtng a string because it said that initially.
+// I didn’t read that we could rework the functions. I would have had it input a number or something to make the if function simpler
+
+// Game function: five rounds, displaying results after each round and alerting the winner at the end
 function game() {
+    // Set win count variables to 0
     let userCount = 0;
     let computerCount = 0;
+
+    // instance one
     playerSelection = getUserInput();
+    console.log("player Selection was " + playerSelection)
     computerSelection = computerPlay();
-    console.log(playRound(playerSelection,computerSelection));
+    console.log("computer Selection was " + computerSelection)
+    roundResult = playRound(playerSelection,computerSelection);
+    console.log(roundResult)
+    if (roundResult.indexOf("lose") !== -1) {
+        ++computerCount;
+    } else if (roundResult.indexOf("win") !== -1) {
+        ++userCount;
+    };
     console.log("Computer: " + computerCount + ". User: " + userCount);
+
+    // instance two
     playerSelection = getUserInput();
+    console.log("player Selection was " + playerSelection)
     computerSelection = computerPlay();
-    console.log(playRound(playerSelection,computerSelection));
+    console.log("computer Selection was " + computerSelection)
+    roundResult = playRound(playerSelection,computerSelection);
+    console.log(roundResult)
+    if (roundResult.indexOf("lose") !== -1) {
+        ++computerCount;
+    } else if (roundResult.indexOf("win") !== -1) {
+        ++userCount;
+    };
     console.log("Computer: " + computerCount + ". User: " + userCount);
+
+    // instance three
     playerSelection = getUserInput();
+    console.log("player Selection was " + playerSelection)
     computerSelection = computerPlay();
-    console.log(playRound(playerSelection,computerSelection));
+    console.log("computer Selection was " + computerSelection)
+    roundResult = playRound(playerSelection,computerSelection);
+    console.log(roundResult)
+    if (roundResult.indexOf("lose") !== -1) {
+        ++computerCount;
+    } else if (roundResult.indexOf("win") !== -1) {
+        ++userCount;
+    };
     console.log("Computer: " + computerCount + ". User: " + userCount);
+    
+    // instance four
     playerSelection = getUserInput();
+    console.log("player Selection was " + playerSelection)
     computerSelection = computerPlay();
-    console.log(playRound(playerSelection,computerSelection));
+    console.log("computer Selection was " + computerSelection)
+    roundResult = playRound(playerSelection,computerSelection);
+    console.log(roundResult)
+    if (roundResult.indexOf("lose") !== -1) {
+        ++computerCount;
+    } else if (roundResult.indexOf("win") !== -1) {
+        ++userCount;
+    };
     console.log("Computer: " + computerCount + ". User: " + userCount);
+    
+    // instance five
     playerSelection = getUserInput();
+    console.log("player Selection was " + playerSelection)
     computerSelection = computerPlay();
-    console.log(playRound(playerSelection,computerSelection));
+    console.log("computer Selection was " + computerSelection)
+    roundResult = playRound(playerSelection,computerSelection);
+    console.log(roundResult)
+    if (roundResult.indexOf("lose") !== -1) {
+        ++computerCount;
+    } else if (roundResult.indexOf("win") !== -1) {
+        ++userCount;
+    };
     console.log("Computer: " + computerCount + ". User: " + userCount);
+
+    // report winnner or loser
+    if (computerCount > userCount) {
+        alert("You lost to the computer!")
+    } else if (userCount > computerCount) {
+        alert("You beat the computer!")
+    } else {
+        alert("Looks like a draw… Hmm…")
+    }
+
+    // reset values
     userCount = 0;
     computerCount = 0;
 }
