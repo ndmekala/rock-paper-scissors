@@ -46,7 +46,7 @@ function getUserInput() {
     let userInputInsensitive = prompt("Rock, paper, scissors! What is your choice?", "");
     userInput = userInputInsensitive.toLowerCase();
     if (userInput == 'rock' || userInput == 'paper' || userInput == 'scissors') {
-        let playerSelection = userInput;
+        return userInput;
     } else {
         alert('Shame on you! It’s called, “Rock, Paper, Scissors”!');
         getUserInput();
@@ -94,29 +94,28 @@ function playRound(player, computer) {
 function game() {
     let userCount = 0;
     let computerCount = 0;
-    getUserInput();
+    playerSelection = getUserInput();
     computerSelection = computerPlay();
     console.log(playRound(playerSelection,computerSelection));
     console.log("Computer: " + computerCount + ". User: " + userCount);
-    getUserInput();
+    playerSelection = getUserInput();
     computerSelection = computerPlay();
     console.log(playRound(playerSelection,computerSelection));
     console.log("Computer: " + computerCount + ". User: " + userCount);
-    getUserInput();
+    playerSelection = getUserInput();
     computerSelection = computerPlay();
     console.log(playRound(playerSelection,computerSelection));
     console.log("Computer: " + computerCount + ". User: " + userCount);
-    getUserInput();
+    playerSelection = getUserInput();
     computerSelection = computerPlay();
     console.log(playRound(playerSelection,computerSelection));
     console.log("Computer: " + computerCount + ". User: " + userCount);
-    getUserInput();
+    playerSelection = getUserInput();
     computerSelection = computerPlay();
     console.log(playRound(playerSelection,computerSelection));
     console.log("Computer: " + computerCount + ". User: " + userCount);
     userCount = 0;
     computerCount = 0;
-    // RESET COUNTER!
 }
 
 game();
