@@ -1,3 +1,5 @@
+
+
 // Function that randomly returns rock, paper, or scissors
 
 function computerPlay() {
@@ -12,6 +14,10 @@ function computerPlay() {
         alert("Oh my!")
     };
 };
+
+// Add an event listener to the buttons that calsl your playRound function with the correct playerSelection every time abutton is clicked
+
+// button triggers playRound with playerSelection
 
 // Function that solicits and returns a player choice (and chooses rock if the player doesn’t input a legitimate choice)
 
